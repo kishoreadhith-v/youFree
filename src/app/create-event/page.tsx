@@ -1,28 +1,57 @@
-'use client';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-import React from "react";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
-
-export default function CreateEventPage() {
-  const team = [
-    { name: "John Doe", id: 1 },
-    { name: "Jane Doe", id: 2 },
-    { name: "John Smith", id: 3 },
-    { name: "Jane Smith", id: 4 },
-    { name: "John Johnson", id: 5 },
-    { name: "Jane Johnson", id: 6 },
-  ];
-
+export default function CardWithForm() {
   return (
-    <Autocomplete
-      defaultItems={team}
-      label="Team Member"
-      placeholder="Search a team member"
-      className="max-w-xs"
-    >
-      {(member) => (
-        (<AutocompleteItem key={member.id}>{member.name}</AutocompleteItem>)
-      )}
-    </Autocomplete>
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Name of your project" />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="framework">Framework</Label>
+              <Select>
+                <SelectTrigger id="framework">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="next">Next.js</SelectItem>
+                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                  <SelectItem value="astro">Astro</SelectItem>
+                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
   );
 }
